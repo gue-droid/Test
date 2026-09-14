@@ -1,0 +1,43 @@
+using MelonLoader;
+using BoneLib;
+using BoneLib.BoneMenu;
+using UnityEngine;
+using SLZ.Marrow.Warehouse;
+
+[assembly: MelonInfo(typeof(FordSpawnerQuest.Main), "Ford Spawner", "1.0.0", "YourName")]
+[assembly: MelonGame("Stress Level Zero", "BONELAB")]
+
+namespace FordSpawnerQuest
+{
+    public class Main : MelonMod
+    {
+        private const string FordCrateBarcode = "SLZ.BONELAB.Content.Crate.NPC.FordBasic";
+
+        public override void OnInitializeMelon()
+        {
+            SetupBoneMenu();
+        }
+
+        private void SetupBoneMenu()
+        {
+            Page mainCategory = Page.Create("Ford Spawner");
+            mainCategory.CreateFunction("Spawn Ford", Color.cyan, () =>
+            {
+                SpawnFord();
+            });
+            BoneMenu.Page.Root.CreatePage("Ford Spawner", Color.yellow, mainCategory);
+        }
+
+        private void SpawnFord()
+        {
+            Vector3 spawnPosition = Player.head.position + (Player.head.forward * 2.0f);
+            Quaternion spawnRotation = Quaternion.LookRotation(-Player.head.forward);
+
+            Crate crate = AssetWarehouse.Instance.GetCrate(FordCrateBarcode);
+            if (crate is SpawnableCrate spawnableCrate)
+            {
+                AssetSpawner.Spawn(spawnableCrate, spawnPosition, spawnRotation);
+            }
+        }
+    }
+}
