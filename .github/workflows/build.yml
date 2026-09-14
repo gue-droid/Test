@@ -1,0 +1,22 @@
+name: Build Mod
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Build Solution
+      run: msbuild FordSpawner.csproj /p:Configuration=Release
+      
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: FordSpawnerQuest-DLL
+        path: bin/Release/net472/FordSpawnerQuest.dll
