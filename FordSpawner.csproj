@@ -1,3 +1,4 @@
+
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
@@ -6,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="LavaGang.MelonLoader" Version="0.6.1" />
+    <Reference Include="MelonLoader">
+      <HintPath>Libs\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="BoneLib">
+      <HintPath>Libs\BoneLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppSLZ.Marrow">
+      <HintPath>Libs\Il2CppSLZ.Marrow.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>Libs\UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
